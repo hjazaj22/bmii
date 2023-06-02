@@ -1,1 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+// ANSI escape sequences for text color
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_PINK    "\x1b[35m"
+#define ANSI_COLOR_WHITE   "\x1b[37m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+#define ANSI_BACKGROUND_WHITE "\x1b[47m"
+
+// Function to display colorful header
+void displayHeader() {
+    system("clear"); // Clear the console (for UNIX-like systems)
+    printf("\n");
+
+    printf(ANSI_BACKGROUND_WHITE ANSI_COLOR_BLUE);
+    printf("******************************\n");
+    printf("*                            *\n");
+    printf("*   Welcome to the BMI       *\n");
+    printf("*        Calculator          *\n");
+    printf("*                            *\n");
+    printf("*   Let's calculate your BMI *\n");
+    printf("*                            *\n");
+    printf("******************************\n");
+    printf("\n");
+    printf(ANSI_COLOR_RESET);
+   
+    printf("\n");
+}
+
+// Function to personalize messages
+void personalizeMessage(const char *name) {
+    printf(ANSI_COLOR_PINK "Hello, %s!\n", name);
+    printf("Let's calculate your BMI.\n");
+    printf("\n");
+    printf(ANSI_COLOR_RESET);
+}
+
+int main() {
+    char name[50]; // Variable to store the user's name
+    printf(ANSI_COLOR_BLUE "Enter your name: ");
+    scanf("%s", name);
+    printf(ANSI_COLOR_RESET);
+
+    displayHeader();
+    personalizeMessage(name);
+
+    // Rest of the code...
+
+    return 0;
+}
 
