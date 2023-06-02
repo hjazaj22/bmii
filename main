@@ -36,6 +36,36 @@ void personalizeMessage(const char *name) {
     printf("Let's calculate your BMI.\n");
     printf("\n");
     printf(ANSI_COLOR_RESET);
+}// Structure to store BMI calculation history
+typedef struct {
+    float height;
+    float weight;
+    float bmi;
+    char classification[20];
+} BMIRecord;
+
+// Function to calculate BMI
+float calculateBMI(float height, float weight, int isMetric) {
+    if (isMetric) {
+        // BMI calculation for metric units (height in meters, weight in kilograms)
+        return weight / (height * height);
+    } else {
+        // BMI calculation for imperial units (height in inches, weight in pounds)
+        return (weight * 703) / (height * height);
+    }
+}
+
+// Function to classify BMI
+void classifyBMI(float bmi, char *classification) {
+    if (bmi < 18.5) {
+        sprintf(classification, "Underweight");
+    } else if (bmi < 25.0) {
+        sprintf(classification, "Normal weight");
+    } else if (bmi < 30.0) {
+        sprintf(classification, "Overweight");
+    } else {
+        sprintf(classification, "Obese");
+    }
 }
 
 int main() {
