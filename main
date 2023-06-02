@@ -9,6 +9,35 @@
 #define ANSI_COLOR_WHITE   "\x1b[37m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define ANSI_BACKGROUND_WHITE "\x1b[47m"
+// Structure to store BMI calculation history
+typedef struct {
+    float height;
+    float weight;
+    float bmi;
+    char classification[20];
+} BMIRecord;
+// Structure to store BMI calculation history
+typedef struct {
+    float height;
+    float weight;
+    float bmi;
+    char classification[20];
+} BMIRecord;
+
+// Function to display BMI calculation history
+void displayHistory(BMIRecord *history, int count) {
+    printf(ANSI_COLOR_BLUE "\nBMI Calculation History:\n");
+    printf("------------------------------\n");
+    for (int i = 0; i < count; i++) {
+        printf("User %d:\n", i + 1);
+        printf("Height: %.2f\n", history[i].height);
+        printf("Weight: %.2f\n", history[i].weight);
+        printf("BMI: %.2f\n", history[i].bmi);
+        printf("Classification: %s\n", history[i].classification);
+        printf("------------------------------\n");
+    }
+    printf(ANSI_COLOR_RESET);
+}
 
 // Function to display colorful header
 void displayHeader() {
@@ -37,6 +66,30 @@ void personalizeMessage(const char *name) {
     printf("\n");
     printf(ANSI_COLOR_RESET);
 }
+// Function to calculate BMI
+float calculateBMI(float height, float weight, int isMetric) {
+    if (isMetric) {
+        // BMI calculation for metric units (height in meters, weight in kilograms)
+        return weight / (height * height);
+    } else {
+        // BMI calculation for imperial units (height in inches, weight in pounds)
+        return (weight * 703) / (height * height);
+    }
+}
+
+// Function to classify BMI
+void classifyBMI(float bmi, char *classification) {
+    if (bmi < 18.5) {
+        sprintf(classification, "Underweight");
+    } else if (bmi < 25.0) {
+        sprintf(classification, "Normal weight");
+    } else if (bmi < 30.0) {
+        sprintf(classification, "Overweight");
+    } else {
+        sprintf(classification, "Obese");
+    }
+}
+
 
 int main() {
     char name[50]; // Variable to store the user's name
@@ -47,8 +100,14 @@ int main() {
     displayHeader();
     personalizeMessage(name);
 
-    // Rest of the code...
+   BMIRecord history[10]; // Assuming maximum of 10 BMI records
+    int recordCount = 0;
+
+    int isMetric = 0; // Flag to check if metric units are used
+    BMIRecord history[10]; // Assuming maximum of 10 BMI records
+    int recordCount = 0;
+
+
 
     return 0;
 }
-
